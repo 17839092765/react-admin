@@ -57,7 +57,7 @@ export default function User() {
     },
   ];
   const upuserData = (record) => {
-    console.log(record);
+    // console.log(record);
     setisModalVisible(true);
     setrecord(record);
   };
@@ -142,7 +142,7 @@ export default function User() {
   };
   const onFinish = async (values) => {
     // console.log(11111, record.key);
-    console.log(values);
+    // console.log(values);
     const result = await editusercase({
       _id: record.key,
       username: values.name,

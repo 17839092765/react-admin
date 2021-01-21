@@ -10,6 +10,7 @@ import {
   ExclamationCircleOutlined,
   EnvironmentFilled,
 } from "@ant-design/icons";
+import store from "../../store";
 import Dayjs from "dayjs";
 // import qingtian from "../../assets/images/晴天.jpg";
 import yutian from "../../assets/images/雨天.jpg";
@@ -23,8 +24,11 @@ function GoLogin() {
   const [intervalId, setintervalId] = useState("");
   const [title, setititle] = useState("");
   const [weather, setweather] = useState({});
-  const [city, setcity] = useState("");
-
+  const [city, setcity] = useState(store.getState());
+  const handleStoreChange = () => {
+    setcity(store.getState());
+  };
+  store.subscribe(handleStoreChange); //监听store变化
   useEffect(() => {
     async function gettianqi() {
       const result = await getweather(city);
@@ -40,6 +44,9 @@ function GoLogin() {
         message.warn("查询天气失败", 1);
       }
     }
+    // setTimeout(() => {
+    //   setcity(store.getState());
+    // }, 2000);
     gettianqi();
   }, [city]);
   let location = useLocation();

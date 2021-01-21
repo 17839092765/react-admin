@@ -1,7 +1,7 @@
 import { Upload, Modal, message } from "antd";
 // import React from "react";
 import { PlusOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { reqDeleteImg } from "../../../api";
 function Uploadpic(props) {
   const [previewVisible, setpreviewVisible] = useState(false);
@@ -18,6 +18,18 @@ function Uploadpic(props) {
       reader.onerror = (error) => reject(error);
     });
   }
+  useEffect(() => {
+    // other code
+    // console.log(props, 88888888888);
+    if (props.imgs) {
+      // console.log(props.imgs[0].name, 333);
+      if (props.imgs[0].name) {
+        setfileList(props.imgs);
+        props.getimgcase(fileList.map((file) => file.name));
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.imgs, fileList]);
   // const beforeUpload = (file) => {
   //   console.log(file);
   //   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -130,7 +142,7 @@ function Uploadpic(props) {
         onPreview={handlePreview}
         onChange={handleChange}
       >
-        {fileList.length >= 8 ? null : uploadButton}
+        {fileList.length >= 1 ? null : uploadButton}
       </Upload>
       <Modal
         visible={previewVisible}

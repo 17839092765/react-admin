@@ -1,7 +1,7 @@
 import { Card, Input, Button, Table, Select, message } from "antd";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { lookshopcase } from "../../api";
+import { lookshopcase, changestatus } from "../../api";
 import { BASE_IMG_URL } from "../../utils/constants";
 const { Option } = Select;
 export default function ShopHome() {
@@ -11,37 +11,22 @@ export default function ShopHome() {
   const [dataSource, setdataSource] = useState([]);
   const [loading, setloading] = useState();
   const [total, settotal] = useState(0);
+  // const [isonline, setisline] = useState("已上架");
   const [pageNum] = useState(1);
+  const [statuspageNum, setstatuspageNum] = useState(1);
+  // const [updefaultData, setupdefaultData] = useState();
 
   useEffect(() => {
-    // async function getdata() {
-    //   setloading(true);
-    //   const result = await lookshopcase({ pageNum: 1, pageSize: 5 });
-    //   console.log(result);
-    //   // let arr = [];
-    //   // result.data.map((item) => {
-    //   //   return arr.push({
-    //   //     name: item.name,
-    //   //     desc: item.desc,
-    //   //     price: item.price,
-    //   //     status: item.status,
-    //   //     _id: item._id,
-    //   //   });
-    //   // });
-    //   // console.log(result);
-    //   // setdataSource(arr);
-    //   setloading(false);
-    // }
-    // getdata();
     // other code
-    getProducts(1);
+    getProducts(pageNum);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [pageNum]);
 
   // 获取商品分类
   const getProducts = async (num) => {
+    // console.log(num);
     setloading(true);
-
+    setstatuspageNum(num);
     let pageNum = num;
     // const { searchName, searchType } = this.state;
     let result;
@@ -63,7 +48,7 @@ export default function ShopHome() {
       setdataSource(list);
       settotal(total);
       setloading(false);
-      message.success(result.msg, 1);
+      // message.success(result.msg, 1);
       // this.setState({
       //   products: list,
       //   total, //设置total可以分页
@@ -76,6 +61,14 @@ export default function ShopHome() {
 
   const addshop = () => {
     history.push("/productshop/addshop");
+  };
+  const goUpShop = (data) => {
+    // console.log(data);
+    // setupdefaultData(data);
+    history.push({
+      pathname: "/productshop/addshop",
+      state: { data },
+    });
   };
   const title = (
     <span>
@@ -103,7 +96,26 @@ export default function ShopHome() {
       添加
     </Button>
   );
-
+  const changeline = async (data) => {
+    // console.log(data);
+    if (data.status === 1) {
+      const result = await changestatus({ _id: data._id, status: 2 });
+      // console.log(result);
+      if (result.status === 0) {
+        getProducts(statuspageNum);
+        message.success(result.msg);
+      }
+      // data.status = 2;
+    } else {
+      const result = await changestatus({ _id: data._id, status: 1 });
+      console.log(result);
+      // data.status = 1;
+      if (result.status === 0) {
+        getProducts(statuspageNum);
+        message.success(result.msg);
+      }
+    }
+  };
   const columns = [
     {
       width: 150,
@@ -125,27 +137,9 @@ export default function ShopHome() {
               padding: "2px",
             }}
             alt="img"
-            src={BASE_IMG_URL + imgs[0]}
+            src={BASE_IMG_URL + (imgs[0] ? imgs[0] : "moren.jpg")}
           ></img>
         );
-        // return imgs.map((item, index) => {
-        //   // console.log(111111111, item);
-        //   return (
-        //     <>
-        //       <img
-        //         key={index}
-        //         style={{
-        //           border: "4px solid #000",
-        //           borderRadius: "10px",
-        //           width: "100%",
-        //           padding: "2px",
-        //         }}
-        //         alt="img"
-        //         src={BASE_IMG_URL + item}
-        //       ></img>
-        //     </>
-        //   );
-        // });
       },
     },
     {
@@ -163,11 +157,13 @@ export default function ShopHome() {
     {
       width: 100,
       title: "状态",
-      render: () => {
+      render: (data) => {
         return (
           <span>
-            <Button type="primary">已上架</Button>
-            <span>在售</span>
+            <h1>{data.status === 1 ? "在售" : "已下架"}</h1>
+            <Button onClick={() => changeline(data)} type="primary">
+              {data.status === 1 ? "下架?" : "上架?"}
+            </Button>
           </span>
         );
       },
@@ -175,12 +171,14 @@ export default function ShopHome() {
     {
       width: 130,
       title: "操作",
-      render: () => {
+      render: (data) => {
         return (
-          <span>
-            <span>详情</span>
-            <span>修改</span>
-          </span>
+          <>
+            <Button type="link">详情</Button>
+            <Button onClick={() => goUpShop(data)} type="link">
+              修改
+            </Button>
+          </>
         );
       },
     },
@@ -199,7 +197,6 @@ export default function ShopHome() {
           onChange: getProducts,
         }}
       />
-      ;
     </Card>
   );
 }

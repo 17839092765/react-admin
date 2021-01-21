@@ -12,7 +12,7 @@ const Edituser = (props) => {
     // console.log(props.record);
     if (props.record) {
       form.setFieldsValue(props.record);
-      console.log(props.record);
+      // console.log(props.record);
       //设置默认选中的树🌲选框
       //   setCheckedKeys(props.record.usercla);
     }
@@ -20,7 +20,7 @@ const Edituser = (props) => {
   useEffect(() => {
     async function getroles() {
       const result = await lookroles({ pageNum: "all" });
-      console.log(result);
+      // console.log(result);
       setroles(result.data);
     }
     getroles();

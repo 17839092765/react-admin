@@ -31,9 +31,9 @@ const AddUser = (props) => {
       return;
     }
     setConfirmLoading(true);
-    console.log(username, email, phone, password, usercla);
+    // console.log(username, email, phone, password, usercla);
     reqRes(username, email, phone, password, usercla).then((res) => {
-      console.log(res);
+      // console.log(res);
       setVisible(false);
       setConfirmLoading(false);
       props.updatalist();
@@ -44,7 +44,7 @@ const AddUser = (props) => {
   };
 
   const handleCancel = () => {
-    console.log("Clicked cancel button");
+    // console.log("Clicked cancel button");
     setVisible(false);
   };
   const handChang1 = (e) => {
@@ -60,7 +60,7 @@ const AddUser = (props) => {
     setemail(e.target.value);
   };
   const handChang5 = (e) => {
-    console.log(e);
+    // console.log(e);
     setusercla(e);
   };
   return (

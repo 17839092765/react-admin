@@ -19,10 +19,10 @@ const validateMessages = {
 };
 
 const Demo = (props) => {
-  console.log(props);
-  const onFinish = (values) => {
-    console.log(values);
-  };
+  // console.log(props);
+  // const onFinish = (values) => {
+  //   // console.log(values);
+  // };
 
   return (
     <Form

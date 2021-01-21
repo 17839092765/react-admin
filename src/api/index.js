@@ -19,6 +19,15 @@ export const getweather = (city) =>
     {},
     "GET"
   );
+
+//坐标转换
+export const getpostion = (city) =>
+  ajax(
+    `https://restapi.amap.com/v3/geocode/regeo?output=JSON&location=${city}&key=63f2a2a297971a375d76bb2295481955&radius=1000&extensions=all`,
+    {},
+    "GET"
+  );
+
 //登录
 export const reqLogin = (username, password) =>
   ajax(BASE + "/login", { username, password }, "POST");
@@ -75,10 +84,40 @@ export const addshopclass = ({
     },
     "POST"
   );
+//editshop修改商品
+export const editshop = ({
+  _id,
+  categoryId,
+  pCategoryId,
+  name,
+  price,
+  desc,
+  status,
+  imgs,
+  detail,
+}) =>
+  ajax(
+    BASE + "/editshop",
+    {
+      _id,
+      categoryId,
+      pCategoryId,
+      name,
+      price,
+      desc,
+      status,
+      imgs,
+      detail,
+    },
+    "POST"
+  );
 //查看商品列表
 export const lookshopcase = ({ pageNum, pageSize }) =>
   ajax(BASE + "/lookshopcase", { pageNum, pageSize }, "POST");
 
+//改变商品状态
+export const changestatus = ({ _id, status }) =>
+  ajax(BASE + "/changestatus", { _id, status }, "POST");
 //添加角色
 export const addroles = (name) => ajax(BASE + "/addroles", { name }, "POST");
 //查看角色

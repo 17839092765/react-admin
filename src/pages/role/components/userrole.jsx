@@ -13,7 +13,7 @@ const UserRoles = (props) => {
     // console.log(props.record);
     if (props.record) {
       form.setFieldsValue(props.record[0]);
-      console.log(props.record);
+      // console.log(props.record);
       //设置默认选中的树🌲选框
       setCheckedKeys(props.record[0].menus);
     }
