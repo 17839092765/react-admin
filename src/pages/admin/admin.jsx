@@ -36,7 +36,13 @@ export default function LayOut() {
       </Sider>
       <Layout>
         <GoLogin />
-        <Content style={{ background: "#fff", border: "1px solid #cecece" }}>
+        <Content
+          style={{
+            background: "#fff",
+            height: "100%",
+            border: "1px solid #cecece",
+          }}
+        >
           <Main />
         </Content>
         <Footer

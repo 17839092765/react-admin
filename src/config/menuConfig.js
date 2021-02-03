@@ -9,7 +9,7 @@ import {
   BarChartOutlined,
   LineChartOutlined,
   PieChartOutlined,
-  DollarCircleOutlined,
+  // DollarCircleOutlined,
 } from "@ant-design/icons";
 const menuList = [
   {
@@ -49,33 +49,33 @@ const menuList = [
   },
 
   {
-    title: "图形图表",
+    title: "地图类",
     key: "/charts",
     icon: <SketchCircleFilled />,
     children: [
       {
-        title: "柱形图",
+        title: "iframe",
         key: "/charts/bar",
         icon: <BarChartOutlined />,
       },
       {
-        title: "折线图",
+        title: "api(定位)",
         key: "/charts/line",
         icon: <LineChartOutlined />,
       },
       {
-        title: "饼图",
+        title: "暂无",
         key: "/charts/pie",
         icon: <PieChartOutlined />,
       },
     ],
   },
 
-  {
-    title: "订单管理",
-    key: "/order",
-    icon: <DollarCircleOutlined />,
-  },
+  // {
+  //   title: "订单管理",
+  //   key: "/order",
+  //   icon: <DollarCircleOutlined />,
+  // },
 ];
 
 export default menuList;

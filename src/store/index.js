@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-function city(state = "柘城", action) {
+function city(state = "北京市", action) {
   switch (action.type) {
     case "getCity":
       //   console.log(action);

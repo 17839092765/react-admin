@@ -88,7 +88,7 @@ export default function Line() {
   }, []);
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <div style={{ position: "relative", width: "100%", height: "80vh" }}>
       <div id="container" style={{ width: "100%", height: "100%" }}></div>
       <div
         style={{

@@ -1,5 +1,7 @@
 @import '~antd/dist/antd.css';
 .App{
+    /* height: 500px; */
     height: 100vh;
-    /* color: rgb(182, 41, 177); */
+    color: rgb(182, 41, 177);
+    /* background: #000; */
 }

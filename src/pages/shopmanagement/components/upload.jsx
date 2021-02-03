@@ -133,8 +133,8 @@ function Uploadpic(props) {
   return (
     <>
       <Upload
-        action="/manage/img/upload"
-        // action="http://121.4.58.185:5001/manage/img/upload"
+        // action="/manage/img/upload"
+        action="http://121.4.58.185:5001/manage/img/upload"
         listType="picture-card"
         name="image" /*请求参数名*/
         fileList={fileList}

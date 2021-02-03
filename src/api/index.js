@@ -2,8 +2,8 @@
 // import {message} from 'antd'
 import ajax from "./ajax";
 
-// const BASE = "http://121.4.58.185:5001";
-const BASE = "";
+const BASE = "http://121.4.58.185:5001";
+// const BASE = "";
 // 登陆
 /*
 export function reqLogin(username, password) {
